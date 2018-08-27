@@ -1,14 +1,12 @@
-package org.sklep.controller;
+package org.shop.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.sklep.enums.KindOfGame;
-import org.sklep.model.ComputerGame;
-import org.sklep.service.ComputerGameService;
+import org.shop.enums.KindOfGame;
+import org.shop.model.ComputerGame;
+import org.shop.service.ComputerGameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +16,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin()
 @RestController
 public class ComputerGameController {
 
 	@Autowired
 	private ComputerGameService cGS;
-
+	
 	@GetMapping("/games")
 	public List<ComputerGame> listaOfGames() {
 		return cGS.getAllGames();
@@ -69,6 +68,14 @@ public class ComputerGameController {
 		cGS.updateComputerGame(computerGame, id);
 
 	}
+	
+	
+	@GetMapping("/games/randomgame")
+	public ComputerGame getRandomGame(){
+		return cGS.getRandomGame();
+		
+	}
+	
 	
 	
 }

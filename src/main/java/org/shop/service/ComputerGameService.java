@@ -1,17 +1,17 @@
-package org.sklep.service;
+package org.shop.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
-import org.sklep.enums.KindOfGame;
-import org.sklep.model.ComputerGame;
-import org.sklep.repository.ComputerGameRepository;
+import org.shop.enums.KindOfGame;
+import org.shop.model.ComputerGame;
+import org.shop.repository.ComputerGameRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -59,12 +59,11 @@ public class ComputerGameService {
 		cGR.save(cg6);
 
 		ComputerGame cg7 = new ComputerGame();
-		cg7.setName("Testowo ");
+		cg7.setName("Fortnite ");
 		cg7.setPrice(new BigDecimal("499.99"));
 		cg7.setKindOfGame(KindOfGame.AKCJI);
 		cGR.save(cg7);
 
-		
 	}
 
 	public List<ComputerGame> getAllGames() {
@@ -72,7 +71,6 @@ public class ComputerGameService {
 
 	}
 
-	
 	public List<ComputerGame> getAllGamesByCategory(KindOfGame kindOfGame) {
 		return cGR.findByKindOfGame(kindOfGame);
 	}
@@ -88,25 +86,34 @@ public class ComputerGameService {
 	public List<ComputerGame> getAllNameOrderBy() {
 		return cGR.findAllByOrderByName();
 	}
-	
-	public void saveComputerGameToDataBase(ComputerGame computerGame){
+
+	public void saveComputerGameToDataBase(ComputerGame computerGame) {
 		cGR.save(computerGame);
-		
+
 	}
-	
-	public void deleteComputerGameFromDataBase(long id){
+
+	public void deleteComputerGameFromDataBase(long id) {
 		cGR.delete(id);
-		
+
 	}
-	
-	public void updateComputerGame(ComputerGame computerGame,long id)
-	{
-		ComputerGame computerGame2  = cGR.findOne(id);
+
+	public void updateComputerGame(ComputerGame computerGame, long id) {
+		ComputerGame computerGame2 = cGR.findOne(id);
 		computerGame2.setName(computerGame.getName());
 		computerGame2.setKindOfGame(computerGame.getKindOfGame());
 		computerGame2.setPrice(computerGame.getPrice());
-		cGR.save(computerGame2);;
-		
+		cGR.save(computerGame2);
+		;
+
+	}
+
+	public ComputerGame getRandomGame() {
+		int computerGameSize = cGR.findAll().size();
+		Random random = new Random();
+		int result = random.nextInt(computerGameSize) + 1;
+
+		return cGR.findById(result);
+
 	}
 
 }

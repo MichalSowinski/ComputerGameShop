@@ -1,4 +1,4 @@
-package org.sklep.model;
+package org.shop.model;
 
 import java.math.BigDecimal;
 
@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.sklep.enums.KindOfGame;
+import org.shop.enums.KindOfGame;
 
 @Entity
 public class ComputerGame {
